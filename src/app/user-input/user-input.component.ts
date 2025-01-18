@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { InvestmentsService } from '../shared/services/investments.service';
 
@@ -12,17 +12,25 @@ import { InvestmentsService } from '../shared/services/investments.service';
 export class UserInputComponent {
   private investmentsService = inject(InvestmentsService);
 
-  initialInvestment = '0';
-  annualInvestment = '0';
-  expectedReturn = '5';
-  duration = '10';
+  initialInvestment = signal('0');
+  annualInvestment = signal('0');
+  expectedReturn = signal('5');
+  duration = signal('10');
 
   onSubmit() {
     this.investmentsService.calculateInvestmentResults(
-      +this.initialInvestment,
-      +this.annualInvestment,
-      +this.duration,
-      +this.expectedReturn
+      +this.initialInvestment(),
+      +this.annualInvestment(),
+      +this.duration(),
+      +this.expectedReturn()
     );
+    this.resetInputs();
+  }
+
+  resetInputs() {
+    this.initialInvestment.set('0');
+    this.annualInvestment.set('0');
+    this.expectedReturn.set('5');
+    this.duration.set('10');
   }
 }

@@ -5,7 +5,7 @@ import { Investment } from '../interfaces/investment.model';
   providedIn: 'root',
 })
 export class InvestmentsService {
-  private annualInvestments = signal<Investment[]>([]);
+  public annualInvestments = signal<Investment[]>([]);
   calculateInvestmentResults(
     initialInvestment: number,
     annualInvestment: number,

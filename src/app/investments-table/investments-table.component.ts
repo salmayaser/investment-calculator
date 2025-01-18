@@ -1,10 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, computed, inject } from '@angular/core';
+import { Investment } from '../shared/interfaces/investment.model';
+import { InvestmentsService } from '../shared/services/investments.service';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-investments-table',
   standalone: true,
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './investments-table.component.html',
   styleUrl: './investments-table.component.css',
 })
-export class InvestmentsTableComponent {}
+export class InvestmentsTableComponent {
+  investmentsService = inject(InvestmentsService);
+  investments = computed(() => this.investmentsService.annualInvestments());
+}
