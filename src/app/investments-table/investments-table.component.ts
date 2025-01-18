@@ -1,5 +1,4 @@
 import { Component, computed, inject } from '@angular/core';
-import { Investment } from '../shared/interfaces/investment.model';
 import { InvestmentsService } from '../shared/services/investments.service';
 import { CurrencyPipe } from '@angular/common';
 
